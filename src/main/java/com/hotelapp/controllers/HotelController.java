@@ -2,6 +2,9 @@ package com.hotelapp.controllers;
 
 import com.hotelapp.models.Hotel;
 import com.hotelapp.service.HotelService;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.*;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +22,20 @@ public class HotelController {
     }
 
 //    ***********************API*****************************
+
+    @PostMapping("/dictionary/{word}")
+    public HttpEntity<?> get(@PathVariable String word) throws UnirestException {
+        HttpResponse<String> response = Unirest.post("https://google-translate1.p.rapidapi.com/language/translate/v2")
+                .header("content-type", "application/x-www-form-urlencoded")
+                .header("accept-encoding", "application/gzip")
+                .header("x-rapidapi-key", "12ec57c52bmsh0f435322398bbbfp17542bjsn60166ecf766d")
+                .header("x-rapidapi-host", "google-translate1.p.rapidapi.com")
+                .body("q="+word+"&target=en&source=uz")
+                .asString();
+        System.out.println(response.getBody());
+
+        return ResponseEntity.ok().body(response.getBody());
+    }
 
    @PostMapping("/hotels")
     public ResponseEntity<Hotel> addHotel(@RequestBody Hotel hotel) {

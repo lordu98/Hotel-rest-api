@@ -7,6 +7,9 @@ import com.hotelapp.models.Menu;
 import com.hotelapp.service.DeliveryService;
 import com.hotelapp.service.HotelService;
 import com.hotelapp.service.MenuService;
+import com.mashape.unirest.http.HttpResponse;
+import com.mashape.unirest.http.Unirest;
+import com.mashape.unirest.http.exceptions.UnirestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -19,8 +22,16 @@ import java.util.Set;
 @SpringBootApplication
 public class SpringHotelappRestapiApplication implements CommandLineRunner {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws UnirestException {
         SpringApplication.run(SpringHotelappRestapiApplication.class, args);
+//        HttpResponse<String> response = Unirest.post("https://google-translate1.p.rapidapi.com/language/translate/v2")
+//                .header("content-type", "application/x-www-form-urlencoded")
+//                .header("accept-encoding", "application/gzip")
+//                .header("x-rapidapi-key", "12ec57c52bmsh0f435322398bbbfp17542bjsn60166ecf766d")
+//                .header("x-rapidapi-host", "google-translate1.p.rapidapi.com")
+//                .body("q=salom&target=en&source=uz")
+//                .asString();
+//        System.out.println(response.getBody());
     }
 
     HotelService hotelService;
